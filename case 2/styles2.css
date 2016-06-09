@@ -25,6 +25,7 @@ body {
         flex: 1;
         padding: 10px;
         border-right: 4px solid #fff;
+        position: relative;
     }
 
     .module .list p {
@@ -37,7 +38,10 @@ body {
         }
 
     .module .btn-sort {
-        padding: 10px 10px;
+        position: absolute;
+        top: 27px;
+        right: 25px;
+        padding: 5px 10px;
         background-color: #51C751;
         color: #fff;
         text-transform: uppercase;

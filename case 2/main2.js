@@ -546,13 +546,17 @@ data = [
 var arrayInElem = document.getElementById("arrayIn"),
     arrayOutBubbleElem = document.getElementById("arrayOutBubble"),
     arrayOutSelectionElem = document.getElementById("arrayOutSelection"),
-    btnSort = document.getElementById("btnSort");
+    btnBubbleSort = document.getElementById("btnBubbleSort"),
+    btnSelectionSort = document.getElementById("btnSelectionSort");
 
 showData(data, arrayInElem);
 
-btnSort.addEventListener("click", function() { 
+btnBubbleSort.addEventListener("click", function() {
     var arrBubbleSort = sortBubble(data);
     showData(arrBubbleSort, arrayOutBubbleElem);
+});
+
+btnSelectionSort.addEventListener("click", function() {
     var arrSelectionSort = sortSelection(data);
     showData(arrSelectionSort, arrayOutSelectionElem);
 });
@@ -569,12 +573,9 @@ function showData(arr, el) {
         pElem.innerHTML = pElem.innerHTML + arr[i].balance;
         el.appendChild(pElem);
     }
-    console.log(arr);
 }
 
 function sortBubble(source) {
-console.log("data:", data);
-console.log("source:", source);
     var arr = source,
         flag = false, // set to true if 2 numbers where replaced
         count = 0,
@@ -584,8 +585,10 @@ console.log("source:", source);
     for (var i = 0, n = arr.length - 1; i < n; i++) {
         for (var j = 0, m = arr.length - 1; j < m; j++) {
             balance = arr[j].balance;
+            balance = balance.replace(",", "");
             left = parseFloat(balance.slice(1));
             balance = arr[j+1].balance;
+            balance = balance.replace(",", "");
             right = parseFloat(balance.slice(1));
             if ( left > right ) {
                 temp = arr[j];
@@ -608,8 +611,6 @@ console.log("source:", source);
 }
 
 function sortSelection(source) {
-console.log("data:", data);
-console.log("source:", source);
     var arr = source,
         count = 0,
         temp, balance, arrItem, minimal, k;
