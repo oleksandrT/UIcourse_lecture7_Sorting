@@ -553,8 +553,8 @@ showData(data, arrayInElem);
 btnSort.addEventListener("click", function() { 
     var arrBubbleSort = sortBubble(data);
     showData(arrBubbleSort, arrayOutBubbleElem);
-    //var arrSelectionSort = sortSelection(data);
-    //showData(arrSelectionSort, arrayOutSelectionElem);
+    var arrSelectionSort = sortSelection(data);
+    showData(arrSelectionSort, arrayOutSelectionElem);
 });
 
 // function displays list of items with name and balance information
@@ -584,9 +584,9 @@ console.log("source:", source);
     for (var i = 0, n = arr.length - 1; i < n; i++) {
         for (var j = 0, m = arr.length - 1; j < m; j++) {
             balance = arr[j].balance;
-            left = parseInt(balance.slice(1));
+            left = parseFloat(balance.slice(1));
             balance = arr[j+1].balance;
-            right = parseInt(balance.slice(1));
+            right = parseFloat(balance.slice(1));
             if ( left > right ) {
                 temp = arr[j];
                 arr[j] = arr[j+1];
@@ -612,23 +612,25 @@ console.log("data:", data);
 console.log("source:", source);
     var arr = source,
         count = 0,
-        temp, balance, left, right;
+        temp, balance, arrItem, minimal, k;
 
     for (var i = 0, n = arr.length; i < n - 1; i++) {
+        k = i;
         for (var j = i+1, n = arr.length; j < n; j++) {
-            balance = arr[i].balance;
+            balance = arr[k].balance;
             balance = balance.replace(",", "");
-            left = parseFloat(balance.slice(1));
+            minimal = parseFloat(balance.slice(1));
             balance = arr[j].balance;
             balance = balance.replace(",", "");
-            right = parseFloat(balance.slice(1));
-            if ( left > right) {
-                temp = arr[j];
-                arr[j] = arr[i];
-                arr[i] = temp;
+            arrItem = parseFloat(balance.slice(1));
+            if ( minimal > arrItem) {
+                k = j;
             }
             count++;
         }
+        temp = arr[k];
+        arr[k] = arr[i];
+        arr[i] = temp;
     }
 
     console.log("selection sort: ", count);
