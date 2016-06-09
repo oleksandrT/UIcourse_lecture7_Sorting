@@ -1,0 +1,45 @@
+/*
+ * General styles
+*/
+html, body {
+    margin: 0;
+    padding: 0;
+    outline: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    padding: 3%;
+}
+
+/*
+ * Components styles
+*/
+    .module .row {
+        display: flex;
+        background-color: #ececec;
+        margin-bottom: 30px;
+    }
+
+    .module .col {
+        flex: 1;
+        padding: 10px;
+        border-right: 4px solid #fff;
+    }
+
+    .module .list p {
+        margin: 0 0 1em;
+    }
+
+        .module .list .name {
+            width: 130px;
+            display: inline-block;
+        }
+
+    .module .btn-sort {
+        padding: 10px 10px;
+        background-color: #51C751;
+        color: #fff;
+        text-transform: uppercase;
+        font-weight: bold;
+    }

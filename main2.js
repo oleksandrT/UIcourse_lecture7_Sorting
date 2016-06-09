@@ -542,41 +542,56 @@ data = [
     }
 ]
 
-// Get DOM elemnts
-var sourceElem = document.getElementById("source"), // Get DOM elements
-    destinationElem = document.getElementById("destination"),
-    btnGenerate = document.getElementById("generate"),
-    btnSort = document.getElementById("sort"),
-    flag = false, // set to true if 2 numbers where replaced
-    arrIn, temp;
+// get DOM elements
+var arrayInElem = document.getElementById("arrayIn"),
+    arrayOutBubbleElem = document.getElementById("arrayOutBubble"),
+    arrayOutSelectionElem = document.getElementById("arrayOutSelection"),
+    btnSort = document.getElementById("btnSort");
 
-btnGenerate.addEventListener("click", function() {
-    generateArray(7);
+showData(data, arrayInElem);
+
+btnSort.addEventListener("click", function() { 
+    var arrBubbleSort = sortBubble(data);
+    showData(arrBubbleSort, arrayOutBubbleElem);
+    var arrSelectionSort = sortSelection(data);
+    showData(arrSelectionSort, arrayOutSelectionElem);
 });
 
-btnSort.addEventListener("click", function() {
-    sort(arrIn);
-    showResult(arrIn);
-});
-
-function generateArray(n) {
-    var tempArr = [];
-    for (var i = 0; i < n; i++) {
-        tempArr[i] = Math.round(Math.random() * 100);
+// function displays list of items with name and balance information
+function showData(arr, el) {
+    el.innerHTML = "";
+    for (var i = 0, n = arr.length; i < n; i++) {
+        var spanElem = document.createElement("span"),
+            pElem = document.createElement("p");
+        spanElem.innerHTML = arr[i].name + ":";
+        spanElem.className = "name";
+        pElem.appendChild(spanElem);
+        pElem.innerHTML = pElem.innerHTML + arr[i].balance;
+        el.appendChild(pElem);
     }
-    arrIn = tempArr;
-    sourceElem.textContent = tempArr.join(" ");
+    //console.log(arr);
 }
 
-function sort(arr) {
+function sortBubble(source) {
+    var arr = source,
+        flag = false, // set to true if 2 numbers where replaced
+        count = 0,
+        temp, balance, left, right;
+
+
     for (var i = 0, n = arr.length - 1; i < n; i++) {
         for (var j = 0, m = arr.length - 1; j < m; j++) {
-            if ( arr[j] > arr[j+1] ) {
+            balance = arr[j].balance;
+            left = parseInt(balance.slice(1));
+            balance = arr[j+1].balance;
+            right = parseInt(balance.slice(1));
+            if ( left > right ) {
                 temp = arr[j];
                 arr[j] = arr[j+1];
                 arr[j+1] = temp;
                 flag = true;
             }
+            count++;
         }
 
         // quit the loop if nothing left to sort
@@ -585,9 +600,33 @@ function sort(arr) {
         }
         flag = false; // reset flag
     }
+
+    console.log("bubble sort: ", count);
+    return arr;
 }
 
-function showResult(arr) {
-    destinationElem.textContent = arr.join(" ");
-}
+function sortSelection(source) {
+    var arr = source,
+        count = 0,
+        temp, balance, left, right;
 
+    for (var i = 0, n = arr.length; i < n - 1; i++) {
+        for (var j = i+1, n = arr.length; j < n; j++) {
+            balance = arr[i].balance;
+            balance = balance.replace(",", "");
+            left = parseFloat(balance.slice(1));
+            balance = arr[j].balance;
+            balance = balance.replace(",", "");
+            right = parseFloat(balance.slice(1));
+            if ( left > right) {
+                temp = arr[j];
+                arr[j] = arr[i];
+                arr[i] = temp;
+            }
+            count++;
+        }
+    }
+
+    console.log("selection sort: ", count);
+    return arr;
+}
