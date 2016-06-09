@@ -553,8 +553,8 @@ showData(data, arrayInElem);
 btnSort.addEventListener("click", function() { 
     var arrBubbleSort = sortBubble(data);
     showData(arrBubbleSort, arrayOutBubbleElem);
-    var arrSelectionSort = sortSelection(data);
-    showData(arrSelectionSort, arrayOutSelectionElem);
+    //var arrSelectionSort = sortSelection(data);
+    //showData(arrSelectionSort, arrayOutSelectionElem);
 });
 
 // function displays list of items with name and balance information
@@ -569,10 +569,12 @@ function showData(arr, el) {
         pElem.innerHTML = pElem.innerHTML + arr[i].balance;
         el.appendChild(pElem);
     }
-    //console.log(arr);
+    console.log(arr);
 }
 
 function sortBubble(source) {
+console.log("data:", data);
+console.log("source:", source);
     var arr = source,
         flag = false, // set to true if 2 numbers where replaced
         count = 0,
@@ -606,6 +608,8 @@ function sortBubble(source) {
 }
 
 function sortSelection(source) {
+console.log("data:", data);
+console.log("source:", source);
     var arr = source,
         count = 0,
         temp, balance, left, right;
