@@ -1,0 +1,39 @@
+/*
+ * General styles
+*/
+html, body {
+    margin: 0;
+    padding: 0;
+    outline: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+/*
+ * Components styles
+*/
+.content {
+    background-color: #ececec;
+    overflow: hidden;
+    width: 50%;
+    margin: 60px auto;
+    padding: 30px;
+}
+
+    .content h1 {
+        text-align: center;
+    }
+
+    .content .row {
+        display: flex;
+    }
+
+    .content .col-button {
+        flex: 1
+    }
+
+    .content .col-array {
+        flex: 5;
+    }
